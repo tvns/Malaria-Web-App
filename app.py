@@ -111,7 +111,7 @@ if st.sidebar.button('Submit'):
 	model = tf.keras.models.load_model("Malaria_detector.h5")
 
 
-	diagnosis = np.argmax(model.predict(final_img), axis=-1)
+	diagnosis = model.predict_classes(final_img)
 
 
 	my_bar = st.sidebar.progress(0)
