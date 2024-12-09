@@ -100,11 +100,15 @@ if st.sidebar.button('Submit'):
 
 
 	new_img = np.array(uploaded_image)
+
+	if new_img.shape[-1] == 4:  
+    		new_img = cv2.cvtColor(new_img, cv2.COLOR_RGBA2RGB)
+	
 	image_size = (130,130)
 	new_img = cv2.resize(new_img, image_size)
-	new_img = new_img/255
+	new_img = new_img/255.0
 
-	final_img = new_img.reshape(1,130,130,3)
+	final_img = np.expand_dims(new_img, axis=0)
 
 
 
