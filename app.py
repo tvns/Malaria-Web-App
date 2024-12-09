@@ -103,6 +103,9 @@ if st.sidebar.button('Submit'):
 
 	if new_img.shape[-1] == 4:  
     		new_img = cv2.cvtColor(new_img, cv2.COLOR_RGBA2RGB)
+
+	elif len(new_img.shape) == 2:  
+        	new_img = cv2.cvtColor(new_img, cv2.COLOR_GRAY2RGB)
 	
 	image_size = (130,130)
 	new_img = cv2.resize(new_img, image_size)
