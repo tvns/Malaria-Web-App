@@ -102,16 +102,17 @@ if st.sidebar.button('Submit'):
 	new_img = np.array(uploaded_image)
 	image_size = (130,130)
 	new_img = cv2.resize(new_img, image_size)
-	new_img = new_img/255
+	new_img = new_img/255.0
 
-	final_img = new_img.reshape(1,130,130,3)
+	final_img = np.expand_dims(new_img, axis=0)
 
 
 
 	model = tf.keras.models.load_model("Malaria_detector.h5")
 
 
-	diagnosis = model.predict_classes(final_img)
+	predictions = model.predict(final_img)
+	diagnosis = np.argmax(predictions, axis=-1)
 
 
 	my_bar = st.sidebar.progress(0)
